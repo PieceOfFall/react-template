@@ -1,0 +1,475 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Home Service API",
+    "version": "1.0.0",
+    "description": "Generated from src/service/home/index.ts"
+  },
+  "servers": [
+    {
+      "url": "/"
+    }
+  ],
+  "paths": {
+    "/audience/product/category/cascaderSelect": {
+      "post": {
+        "tags": ["home"],
+        "summary": "Get category cascader list",
+        "operationId": "getCategoryList",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryListResponseHome"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/audience/marketing/goodsList/newcomer": {
+      "post": {
+        "tags": ["home"],
+        "summary": "Newcomer goods list",
+        "operationId": "newcomerGoodsList",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarketingGoodsListParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageHelper_NewcomerGoodsListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/audience/marketing/goodsList/groupBuy": {
+      "post": {
+        "tags": ["home"],
+        "summary": "Group buy goods list",
+        "operationId": "groupBuyGoodsList",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarketingGoodsListParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageHelper_GroupBuyGoodsListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/audience/marketing/goodsList/seckill": {
+      "post": {
+        "tags": ["home"],
+        "summary": "Seckill goods list",
+        "operationId": "seckillGoodsList",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarketingGoodsListParam"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageHelper_SeckillGoodsListResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/audience/product/spuInfo/list": {
+      "post": {
+        "tags": ["home"],
+        "summary": "Get product list",
+        "operationId": "getProductList",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProductListParamHome"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductListResponseHome"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "MarketingGoodsListParam": {
+        "type": "object",
+        "properties": {
+          "pageNo": { "type": "integer" },
+          "pageSize": { "type": "integer" }
+        },
+        "required": ["pageNo", "pageSize"]
+      },
+      "ProductListParamHome": {
+        "type": "object",
+        "properties": {
+          "productNo": { "type": "string" },
+          "productName": { "type": "string" },
+          "firstCategoryId": { "type": "integer" },
+          "secondCategoryId": { "type": "integer", "nullable": true },
+          "thirdCategoryId": { "type": "integer" },
+          "productStatus": { "type": "integer" },
+          "createTimeStart": { "type": "string" },
+          "createTimeEnd": { "type": "string" },
+          "pageNo": { "type": "integer" },
+          "pageSize": { "type": "integer" }
+        }
+      },
+      "ProductImageHome": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "vendorId": { "type": "integer" },
+          "productId": { "type": "integer" },
+          "productImg1": { "type": "string" },
+          "productImg2": { "type": "string" },
+          "productImg3": { "type": "string" },
+          "productImg4": { "type": "string" },
+          "productImg5": { "type": "string" },
+          "productDetailImg1": { "type": "string" },
+          "productDetailImg2": { "type": "string" },
+          "productDetailImg3": { "type": "string" },
+          "productDetailImg4": { "type": "string" },
+          "productDetailImg5": { "type": "string" }
+        }
+      },
+      "ProductHome": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "vendorId": { "type": "integer" },
+          "productNo": { "type": "string" },
+          "productName": { "type": "string" },
+          "upcCode": { "type": "string" },
+          "productBrand": { "type": "string" },
+          "shortName": { "type": "string" },
+          "productSpec": { "type": "string" },
+          "factoryName": { "type": "string" },
+          "approvalNum": { "type": "string" },
+          "firstCategoryId": { "type": "integer" },
+          "firstCategoryName": { "type": "string" },
+          "secondCategoryId": { "type": "integer" },
+          "secondCategoryName": { "type": "string" },
+          "thirdCategoryId": { "type": "integer" },
+          "thirdCategoryName": { "type": "string" },
+          "productMainImg": { "type": "string" },
+          "status": { "type": "integer" },
+          "prescriptionFlag": { "type": "integer" },
+          "inventory": { "type": "integer" },
+          "salePrice": { "type": "number" },
+          "productImage": {
+            "$ref": "#/components/schemas/ProductImageHome"
+          }
+        },
+        "required": [
+          "id",
+          "vendorId",
+          "productNo",
+          "productName",
+          "upcCode",
+          "productBrand",
+          "shortName",
+          "productSpec",
+          "factoryName",
+          "approvalNum",
+          "firstCategoryId",
+          "firstCategoryName",
+          "secondCategoryId",
+          "secondCategoryName",
+          "thirdCategoryId",
+          "thirdCategoryName",
+          "productMainImg",
+          "status",
+          "prescriptionFlag",
+          "inventory",
+          "salePrice",
+          "productImage"
+        ]
+      },
+      "ProductListResponseHome": {
+        "type": "object",
+        "properties": {
+          "total": { "type": "integer" },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductHome"
+            }
+          }
+        },
+        "required": ["total", "list"]
+      },
+      "CategoryItemHome": {
+        "type": "object",
+        "properties": {
+          "value": { "type": "integer" },
+          "label": { "type": "string" },
+          "children": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CategoryItemHome"
+            }
+          }
+        },
+        "required": ["value", "label"]
+      },
+      "CategoryListResponseHome": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/CategoryItemHome"
+        }
+      },
+      "GoodsListResponseBase": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "activityId": { "type": "integer" },
+          "spuId": { "type": "integer" },
+          "skuId": { "type": "integer" },
+          "displayTitle": { "type": "string" },
+          "displayImg": { "type": "string" },
+          "originalPrice": { "type": "number" },
+          "activityPrice": { "type": "number" },
+          "activityStock": { "type": "integer" },
+          "soldCount": { "type": "integer" },
+          "startTime": { "type": "string" },
+          "endTime": { "type": "string" },
+          "userPerLimit": { "type": "integer" },
+          "userTotalLimit": { "type": "integer" },
+          "priceType": { "type": "integer" }
+        },
+        "required": [
+          "id",
+          "activityId",
+          "spuId",
+          "skuId",
+          "displayTitle",
+          "displayImg",
+          "originalPrice",
+          "activityPrice",
+          "activityStock",
+          "soldCount",
+          "startTime",
+          "endTime",
+          "userPerLimit",
+          "userTotalLimit",
+          "priceType"
+        ]
+      },
+      "GroupBuyGoodsListResponse": {
+        "allOf": [
+          { "$ref": "#/components/schemas/GoodsListResponseBase" },
+          {
+            "type": "object",
+            "properties": {
+              "groupSize": { "type": "integer" },
+              "groupTimeLimit": { "type": "integer" }
+            },
+            "required": ["groupSize", "groupTimeLimit"]
+          }
+        ]
+      },
+      "SeckillGoodsListResponse": {
+        "$ref": "#/components/schemas/GoodsListResponseBase"
+      },
+      "NewcomerGoodsListResponse": {
+        "allOf": [
+          { "$ref": "#/components/schemas/GoodsListResponseBase" },
+          {
+            "type": "object",
+            "properties": {
+              "canBuy": { "type": "boolean" }
+            },
+            "required": ["canBuy"]
+          }
+        ]
+      },
+      "PageHelper_NewcomerGoodsListResponse": {
+        "type": "object",
+        "properties": {
+          "pageNum": { "type": "integer" },
+          "pageSize": { "type": "integer" },
+          "size": { "type": "integer" },
+          "total": { "type": "integer" },
+          "pages": { "type": "integer" },
+          "prePage": { "type": "integer" },
+          "nextPage": { "type": "integer" },
+          "isFirstPage": { "type": "boolean" },
+          "isLastPage": { "type": "boolean" },
+          "hasPreviousPage": { "type": "boolean" },
+          "hasNextPage": { "type": "boolean" },
+          "navigatePages": { "type": "integer" },
+          "navigatePageNums": {
+            "type": "array",
+            "items": { "type": "integer" }
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/NewcomerGoodsListResponse"
+            }
+          }
+        },
+        "required": [
+          "pageNum",
+          "pageSize",
+          "size",
+          "total",
+          "pages",
+          "prePage",
+          "nextPage",
+          "isFirstPage",
+          "isLastPage",
+          "hasPreviousPage",
+          "hasNextPage",
+          "navigatePages",
+          "navigatePageNums",
+          "list"
+        ]
+      },
+      "PageHelper_GroupBuyGoodsListResponse": {
+        "type": "object",
+        "properties": {
+          "pageNum": { "type": "integer" },
+          "pageSize": { "type": "integer" },
+          "size": { "type": "integer" },
+          "total": { "type": "integer" },
+          "pages": { "type": "integer" },
+          "prePage": { "type": "integer" },
+          "nextPage": { "type": "integer" },
+          "isFirstPage": { "type": "boolean" },
+          "isLastPage": { "type": "boolean" },
+          "hasPreviousPage": { "type": "boolean" },
+          "hasNextPage": { "type": "boolean" },
+          "navigatePages": { "type": "integer" },
+          "navigatePageNums": {
+            "type": "array",
+            "items": { "type": "integer" }
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GroupBuyGoodsListResponse"
+            }
+          }
+        },
+        "required": [
+          "pageNum",
+          "pageSize",
+          "size",
+          "total",
+          "pages",
+          "prePage",
+          "nextPage",
+          "isFirstPage",
+          "isLastPage",
+          "hasPreviousPage",
+          "hasNextPage",
+          "navigatePages",
+          "navigatePageNums",
+          "list"
+        ]
+      },
+      "PageHelper_SeckillGoodsListResponse": {
+        "type": "object",
+        "properties": {
+          "pageNum": { "type": "integer" },
+          "pageSize": { "type": "integer" },
+          "size": { "type": "integer" },
+          "total": { "type": "integer" },
+          "pages": { "type": "integer" },
+          "prePage": { "type": "integer" },
+          "nextPage": { "type": "integer" },
+          "isFirstPage": { "type": "boolean" },
+          "isLastPage": { "type": "boolean" },
+          "hasPreviousPage": { "type": "boolean" },
+          "hasNextPage": { "type": "boolean" },
+          "navigatePages": { "type": "integer" },
+          "navigatePageNums": {
+            "type": "array",
+            "items": { "type": "integer" }
+          },
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SeckillGoodsListResponse"
+            }
+          }
+        },
+        "required": [
+          "pageNum",
+          "pageSize",
+          "size",
+          "total",
+          "pages",
+          "prePage",
+          "nextPage",
+          "isFirstPage",
+          "isLastPage",
+          "hasPreviousPage",
+          "hasNextPage",
+          "navigatePages",
+          "navigatePageNums",
+          "list"
+        ]
+      }
+    }
+  }
+}
