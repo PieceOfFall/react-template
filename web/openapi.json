@@ -1,0 +1,292 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Live Mall API",
+    "version": "1.0.0",
+    "description": "Generated from src/service/auth and src/service/user"
+  },
+  "paths": {
+    "/auth/audience/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Audience login",
+        "operationId": "login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginForm"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Business response wrapper for login result",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/audience/user/getUserInfo": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get current user info",
+        "operationId": "getUserInfo",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Business response wrapper for user info",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInfoResponseWrapper"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    },
+    "schemas": {
+      "LoginForm": {
+        "type": "object",
+        "required": [
+          "mobile",
+          "password"
+        ],
+        "properties": {
+          "mobile": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginResult": {
+        "type": "object",
+        "required": [
+          "access_token",
+          "expires_in",
+          "tencentLiveUserId",
+          "tencentLiveUserSig"
+        ],
+        "properties": {
+          "access_token": {
+            "type": "string"
+          },
+          "expires_in": {
+            "type": "integer"
+          },
+          "tencentLiveUserId": {
+            "type": "string"
+          },
+          "tencentLiveUserSig": {
+            "type": "string"
+          }
+        }
+      },
+      "LoginResponse": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ResponseWithMessageLoginResult"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseWithMsgLoginResult"
+          }
+        ]
+      },
+      "ResponseWithMessageLoginResult": {
+        "type": "object",
+        "required": [
+          "code",
+          "data",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LoginResult"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      },
+      "ResponseWithMsgLoginResult": {
+        "type": "object",
+        "required": [
+          "code",
+          "data",
+          "msg"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/LoginResult"
+          },
+          "msg": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      },
+      "UserInfo": {
+        "type": "object",
+        "required": [
+          "id",
+          "thirdUid",
+          "mobile",
+          "nickName",
+          "realNmae",
+          "avatar",
+          "birthday",
+          "sex",
+          "isReal",
+          "createTime",
+          "updateTime",
+          "userLevel",
+          "userLevelName"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "thirdUid": {
+            "type": "integer"
+          },
+          "mobile": {
+            "type": "string"
+          },
+          "nickName": {
+            "type": "string"
+          },
+          "realNmae": {
+            "type": "string"
+          },
+          "avatar": {
+            "type": "string"
+          },
+          "birthday": {
+            "type": "string"
+          },
+          "sex": {
+            "type": "string",
+            "description": "F or M"
+          },
+          "isReal": {
+            "type": "integer",
+            "description": "0:not verified, 1:verified"
+          },
+          "createTime": {
+            "type": "string"
+          },
+          "updateTime": {
+            "type": "string"
+          },
+          "userLevel": {
+            "type": "integer"
+          },
+          "userLevelName": {
+            "type": "string"
+          }
+        }
+      },
+      "UserInfoResponse": {
+        "type": "object",
+        "required": [
+          "user",
+          "tencentLiveUserId"
+        ],
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserInfo"
+          },
+          "tencentLiveUserId": {
+            "type": "string"
+          }
+        }
+      },
+      "UserInfoResponseWrapper": {
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ResponseWithMessageUserInfoResponse"
+          },
+          {
+            "$ref": "#/components/schemas/ResponseWithMsgUserInfoResponse"
+          }
+        ]
+      },
+      "ResponseWithMessageUserInfoResponse": {
+        "type": "object",
+        "required": [
+          "code",
+          "data",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UserInfoResponse"
+          },
+          "message": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      },
+      "ResponseWithMsgUserInfoResponse": {
+        "type": "object",
+        "required": [
+          "code",
+          "data",
+          "msg"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer"
+          },
+          "data": {
+            "$ref": "#/components/schemas/UserInfoResponse"
+          },
+          "msg": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    }
+  }
+}
