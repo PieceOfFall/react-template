@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { onToast, type AppToast } from '@/util/toast';
+import { onToast, type AppToast } from '@/lib/toast';
 
 import {
   Toast,

@@ -9,7 +9,7 @@ declare global {
 
   type ResponsePromise<T = unknown> = Promise<AxiosResponse<ResponseRecord<T>>>;
 
-  declare interface PageHelper<T> {
+  interface PageHelper<T> {
     pageNum: number 
     pageSize: number
     size: number 
@@ -26,5 +26,3 @@ declare global {
     list: T[]
   }
 }
-
-export { };

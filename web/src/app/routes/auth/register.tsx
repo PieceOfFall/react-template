@@ -4,7 +4,7 @@ import { Link, Navigate, useNavigate } from 'react-router';
 import { z } from 'zod';
 import { Loader2 } from 'lucide-react';
 
-import { registerInputSchema, useRegister, useUser } from '@/util/auth';
+import { registerInputSchema, useRegister, useUser } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';

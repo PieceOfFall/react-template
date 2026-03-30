@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { LogOut } from 'lucide-react';
 
-import { useLogout, useUser } from '@/util/auth';
+import { useLogout, useUser } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 

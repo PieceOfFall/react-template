@@ -5,8 +5,8 @@ import Axios, {
   type InternalAxiosRequestConfig,
 } from 'axios';
 
-import { env } from './env.ts';
-import { clearAccessToken, getAccessToken } from '@/service/token.ts';
+import { env } from '../util/env.ts';
+import { clearAccessToken, getAccessToken } from '@/features/token.ts';
 import { errorToast } from './toast.ts';
 
 const LOGIN_PATH = '/auth/login';

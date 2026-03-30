@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router';
 import { Loader2 } from 'lucide-react';
 
 import { useUser } from './auth.ts';
-import { getHref } from '../path.ts';
+import { getHref } from '../../util/path.ts';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 

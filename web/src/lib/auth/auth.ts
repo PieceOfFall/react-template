@@ -8,7 +8,7 @@ import {
   logout,
   registerWithMobileAndPassword,
   type AuthUser,
-} from '@/service';
+} from '@/features';
 
 export const loginInputSchema = z.object({
   mobile: z.string().min(1, 'Required'),

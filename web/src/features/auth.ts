@@ -1,4 +1,4 @@
-import { request } from '@/util/http.ts';
+import { request } from '@/lib/http.ts';
 
 import { clearAccessToken, setAccessToken } from './token.ts';
 import { mockLogout, mockRegister } from './mock.ts';

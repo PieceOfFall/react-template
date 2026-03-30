@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router';
 import { Loader2 } from 'lucide-react';
 
-import { type LoginInput, loginInputSchema, useLogin, useUser } from '@/util/auth';
+import { type LoginInput, loginInputSchema, useLogin, useUser } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';

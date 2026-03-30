@@ -5,7 +5,7 @@ import { Navigate, createBrowserRouter } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
 import { Loader2 } from 'lucide-react';
 
-import { ProtectedRoute } from '@/util/auth';
+import { ProtectedRoute } from '@/lib/auth/index.ts';
 
 import {
   default as AppRoot,

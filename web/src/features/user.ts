@@ -1,4 +1,4 @@
-﻿import { request } from '@/util/http.ts';
+﻿import { request } from '@/lib/http.ts';
 
 import type { AuthUser, UserInfoResponse } from './types.ts';
 

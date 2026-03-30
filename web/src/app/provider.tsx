@@ -6,9 +6,9 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Loader2 } from 'lucide-react';
 
 import { MainErrorFallback } from '@/components/errors/main.tsx';
-import { getAccessToken } from '@/service';
-import { AuthLoader } from '@/util/auth';
-import { queryConfig } from '@/util/react-query';
+import { getAccessToken } from '@/features';
+import { AuthLoader } from '@/lib/auth';
+import { queryConfig } from '@/lib/react-query';
 import { Button } from '@/components/ui/button';
 import { Toaster } from '@/components/ui/toaster';
 
