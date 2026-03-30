@@ -18,11 +18,13 @@ const HomeRoute = () => {
   };
 
   return (
-    <div className="min-h-screen bg-muted/40 px-4 py-10">
+    <div className="bg-muted/40 min-h-screen px-4 py-10">
       <div className="mx-auto w-full max-w-4xl space-y-6">
         <Card>
           <CardHeader>
-            <CardDescription className="uppercase tracking-widest text-xs font-semibold">Home</CardDescription>
+            <CardDescription className="text-xs font-semibold tracking-widest uppercase">
+              Home
+            </CardDescription>
             <CardTitle className="text-3xl font-bold tracking-tight">
               {profile?.nickName ? `Hi, ${profile.nickName}` : 'Hi there'}
             </CardTitle>
@@ -36,21 +38,29 @@ const HomeRoute = () => {
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 text-sm sm:grid-cols-2">
-              <div className="rounded-lg border bg-card p-4 shadow-sm">
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Mobile</p>
-                <p className="mt-1 font-medium text-foreground">{profile?.mobile ?? '-'}</p>
+              <div className="bg-card rounded-lg border p-4 shadow-sm">
+                <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
+                  Mobile
+                </p>
+                <p className="text-foreground mt-1 font-medium">{profile?.mobile ?? '-'}</p>
               </div>
-              <div className="rounded-lg border bg-card p-4 shadow-sm">
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Nickname</p>
-                <p className="mt-1 font-medium text-foreground">{profile?.nickName ?? '-'}</p>
+              <div className="bg-card rounded-lg border p-4 shadow-sm">
+                <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
+                  Nickname
+                </p>
+                <p className="text-foreground mt-1 font-medium">{profile?.nickName ?? '-'}</p>
               </div>
-              <div className="rounded-lg border bg-card p-4 shadow-sm">
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">User ID</p>
-                <p className="mt-1 font-medium text-foreground">{profile?.id ?? '-'}</p>
+              <div className="bg-card rounded-lg border p-4 shadow-sm">
+                <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
+                  User ID
+                </p>
+                <p className="text-foreground mt-1 font-medium">{profile?.id ?? '-'}</p>
               </div>
-              <div className="rounded-lg border bg-card p-4 shadow-sm">
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground">Level</p>
-                <p className="mt-1 font-medium text-foreground">{profile?.userLevelName ?? '-'}</p>
+              <div className="bg-card rounded-lg border p-4 shadow-sm">
+                <p className="text-muted-foreground text-xs font-medium tracking-wide uppercase">
+                  Level
+                </p>
+                <p className="text-foreground mt-1 font-medium">{profile?.userLevelName ?? '-'}</p>
               </div>
             </div>
 
