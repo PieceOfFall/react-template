@@ -5,20 +5,19 @@ import { Navigate, createBrowserRouter } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
 import { Loader2 } from 'lucide-react';
 
-import { ProtectedRoute } from '@/lib/auth/index.ts';
+import { ProtectedRoute } from '@/components/auth/index.ts';
 
-import {
-  default as AppRoot,
-  ErrorBoundary as AppRootErrorBoundary,
-} from './routes/app/root.tsx';
+import { default as AppRoot, ErrorBoundary as AppRootErrorBoundary } from './routes/app/root.tsx';
 
 const RouteHydrateFallback = () => (
-  <div className="flex min-h-screen items-center justify-center bg-background px-4">
+  <div className="bg-background flex min-h-screen items-center justify-center px-4">
     <div className="flex flex-col items-center space-y-4 text-center">
-      <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <Loader2 className="text-primary h-8 w-8 animate-spin" />
       <div className="space-y-1">
-        <h2 className="text-lg font-semibold tracking-tight text-foreground">Loading route</h2>
-        <p className="text-sm text-muted-foreground">Fetching route module and preparing page state.</p>
+        <h2 className="text-foreground text-lg font-semibold tracking-tight">Loading route</h2>
+        <p className="text-muted-foreground text-sm">
+          Fetching route module and preparing page state.
+        </p>
       </div>
     </div>
   </div>

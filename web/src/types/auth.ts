@@ -32,4 +32,3 @@ export type UserInfoResponse = {
 };
 
 export type AuthUser = UserInfoResponse;
-

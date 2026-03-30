@@ -1,9 +1,9 @@
 import { request } from '@/lib/http.ts';
+import type { AuthUser, LoginForm, LoginResult, UserInfoResponse } from '@/types/auth.ts';
 
-import { clearAccessToken, setAccessToken } from './token.ts';
+import { clearAccessToken, setAccessToken } from '../util/token.ts';
 import { mockLogout, mockRegister } from './mock.ts';
 import { getCurrentUser } from './user.ts';
-import type { AuthUser, LoginForm, LoginResult, UserInfoResponse } from './types.ts';
 
 export function login(data: LoginForm): ResponsePromise<LoginResult> {
   return request<LoginResult>({

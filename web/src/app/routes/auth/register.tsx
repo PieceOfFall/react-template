@@ -6,7 +6,14 @@ import { Loader2 } from 'lucide-react';
 
 import { registerInputSchema, useRegister, useUser } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -58,7 +65,7 @@ const RegisterRoute = () => {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4 py-12">
+    <div className="bg-muted/40 flex min-h-screen items-center justify-center px-4 py-12">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="space-y-1">
           <CardTitle>Create account</CardTitle>
@@ -68,23 +75,17 @@ const RegisterRoute = () => {
           <form className="space-y-4" onSubmit={onSubmit}>
             <div className="space-y-2">
               <Label htmlFor="mobile">Mobile</Label>
-              <Input
-                id="mobile"
-                placeholder="e.g. 13800138000"
-                {...register('mobile')}
-              />
+              <Input id="mobile" placeholder="your phone number" {...register('mobile')} />
               {errors.mobile && (
-                <p className="text-[0.8rem] font-medium text-destructive">{getFieldMessage(errors.mobile.message)}</p>
+                <p className="text-destructive text-[0.8rem] font-medium">
+                  {getFieldMessage(errors.mobile.message)}
+                </p>
               )}
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="nickName">Nickname (optional)</Label>
-              <Input
-                id="nickName"
-                placeholder="your nickname"
-                {...register('nickName')}
-              />
+              <Input id="nickName" placeholder="your nickname" {...register('nickName')} />
             </div>
 
             <div className="space-y-2">
@@ -92,11 +93,13 @@ const RegisterRoute = () => {
               <Input
                 id="password"
                 type="password"
-                placeholder="at least 5 characters"
+                placeholder="your password"
                 {...register('password')}
               />
               {errors.password && (
-                <p className="text-[0.8rem] font-medium text-destructive">{getFieldMessage(errors.password.message)}</p>
+                <p className="text-destructive text-[0.8rem] font-medium">
+                  {getFieldMessage(errors.password.message)}
+                </p>
               )}
             </div>
 
@@ -109,14 +112,18 @@ const RegisterRoute = () => {
                 {...register('confirmPassword')}
               />
               {errors.confirmPassword && (
-                <p className="text-[0.8rem] font-medium text-destructive">{getFieldMessage(errors.confirmPassword.message)}</p>
+                <p className="text-destructive text-[0.8rem] font-medium">
+                  {getFieldMessage(errors.confirmPassword.message)}
+                </p>
               )}
             </div>
 
             {registerMutation.error ? (
               <Alert variant="destructive">
                 <AlertDescription>
-                  {registerMutation.error instanceof Error ? registerMutation.error.message : 'Register failed.'}
+                  {registerMutation.error instanceof Error
+                    ? registerMutation.error.message
+                    : 'Register failed.'}
                 </AlertDescription>
               </Alert>
             ) : null}
@@ -127,9 +134,9 @@ const RegisterRoute = () => {
             </Button>
           </form>
         </CardContent>
-        <CardFooter className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
+        <CardFooter className="text-muted-foreground flex flex-wrap items-center justify-center gap-2 text-sm">
           Already have an account?{' '}
-          <Link className="font-semibold text-primary hover:underline" to="/auth/login">
+          <Link className="text-primary font-semibold hover:underline" to="/auth/login">
             Sign in
           </Link>
         </CardFooter>

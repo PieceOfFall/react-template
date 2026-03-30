@@ -1,6 +1,5 @@
-﻿import { request } from '@/lib/http.ts';
-
-import type { AuthUser, UserInfoResponse } from './types.ts';
+import { request } from '@/lib/http.ts';
+import type { AuthUser, UserInfoResponse } from '@/types/auth.ts';
 
 export function queryCurrentUser(): ResponsePromise<UserInfoResponse> {
   return request<UserInfoResponse>({

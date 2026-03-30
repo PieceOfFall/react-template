@@ -6,7 +6,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Loader2 } from 'lucide-react';
 
 import { MainErrorFallback } from '@/components/errors/main.tsx';
-import { getAccessToken } from '@/features';
+import { getAccessToken } from '@/util/token';
 import { AuthLoader } from '@/lib/auth';
 import { queryConfig } from '@/lib/react-query';
 import { Button } from '@/components/ui/button';
@@ -25,10 +25,10 @@ const FullScreenPanel = ({
   description: string;
   children?: React.ReactNode;
 }) => (
-  <div className="flex min-h-screen items-center justify-center bg-background px-4 text-center">
+  <div className="bg-background flex min-h-screen items-center justify-center px-4 text-center">
     <div className="w-full max-w-md space-y-4">
-      <h2 className="text-2xl font-semibold tracking-tight text-foreground">{title}</h2>
-      <p className="text-sm text-muted-foreground">{description}</p>
+      <h2 className="text-foreground text-2xl font-semibold tracking-tight">{title}</h2>
+      <p className="text-muted-foreground text-sm">{description}</p>
       {children}
     </div>
   </div>
@@ -49,7 +49,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
           title="Loading application"
           description="Preparing modules and restoring cached client state."
         >
-          <Loader2 className="mx-auto mt-6 h-8 w-8 animate-spin text-primary" />
+          <Loader2 className="text-primary mx-auto mt-6 h-8 w-8 animate-spin" />
         </FullScreenPanel>
       }
     >
@@ -64,7 +64,7 @@ export const AppProvider = ({ children }: AppProviderProps) => {
                     title="Authenticating session"
                     description="Contacting the server to verify your access token and profile state."
                   >
-                    <div className="mt-6 flex justify-center text-muted-foreground">
+                    <div className="text-muted-foreground mt-6 flex justify-center">
                       <Loader2 className="h-6 w-6 animate-spin" />
                     </div>
                   </FullScreenPanel>
@@ -76,15 +76,8 @@ export const AppProvider = ({ children }: AppProviderProps) => {
                   description={error instanceof Error ? error.message : 'Unknown error'}
                 >
                   <div className="mt-6 flex flex-wrap justify-center gap-3">
-                    <Button
-                      onClick={() => window.location.reload()}
-                    >
-                      Retry
-                    </Button>
-                    <Button
-                      variant="outline"
-                      onClick={() => window.location.assign('/auth/login')}
-                    >
+                    <Button onClick={() => window.location.reload()}>Retry</Button>
+                    <Button variant="outline" onClick={() => window.location.assign('/auth/login')}>
                       Back to Login
                     </Button>
                   </div>

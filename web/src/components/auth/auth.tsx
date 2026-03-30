@@ -1,7 +1,7 @@
 import { Navigate, useLocation } from 'react-router';
 import { Loader2 } from 'lucide-react';
 
-import { useUser } from './auth.ts';
+import { useUser } from '@/lib/auth.ts';
 import { getHref } from '../../util/path.ts';
 import { Button } from '@/components/ui/button';
 import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -17,8 +17,8 @@ const FullPageState = ({
   primaryLabel: string;
   onPrimary: () => void;
 }) => (
-  <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4 py-16">
-    <Card className="w-full max-w-md shadow-lg text-center">
+  <div className="bg-muted/40 flex min-h-screen items-center justify-center px-4 py-16">
+    <Card className="w-full max-w-md text-center shadow-lg">
       <CardHeader>
         <CardTitle className="text-xl">{title}</CardTitle>
         <CardDescription>{description}</CardDescription>
@@ -52,7 +52,9 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     return (
       <FullPageState
         title="Session check failed"
-        description={user.error instanceof Error ? user.error.message : 'Unable to validate your login state.'}
+        description={
+          user.error instanceof Error ? user.error.message : 'Unable to validate your login state.'
+        }
         primaryLabel="Retry"
         onPrimary={() => user.refetch()}
       />

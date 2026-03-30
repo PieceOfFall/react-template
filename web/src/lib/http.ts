@@ -6,7 +6,7 @@ import Axios, {
 } from 'axios';
 
 import { env } from '../util/env.ts';
-import { clearAccessToken, getAccessToken } from '@/features/token.ts';
+import { clearAccessToken, getAccessToken } from '@/util/token.ts';
 import { errorToast } from './toast.ts';
 
 const LOGIN_PATH = '/auth/login';

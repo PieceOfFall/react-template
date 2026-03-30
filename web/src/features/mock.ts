@@ -1,4 +1,4 @@
-import type { AuthUser, UserInfoResponse } from './types.ts';
+import type { AuthUser, UserInfoResponse } from '@/types/auth.ts';
 
 const MOCK_DELAY = 200;
 
@@ -49,5 +49,3 @@ export const mockRegister = async (input: {
 export const mockLogout = async (): Promise<void> => {
   await wait(MOCK_DELAY);
 };
-
-

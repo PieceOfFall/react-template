@@ -5,7 +5,14 @@ import { Loader2 } from 'lucide-react';
 
 import { type LoginInput, loginInputSchema, useLogin, useUser } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription } from '@/components/ui/alert';
@@ -41,7 +48,7 @@ const LoginRoute = () => {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4 py-12">
+    <div className="bg-muted/40 flex min-h-screen items-center justify-center px-4 py-12">
       <Card className="w-full max-w-md shadow-lg">
         <CardHeader className="space-y-1">
           <CardTitle>Welcome back</CardTitle>
@@ -53,11 +60,14 @@ const LoginRoute = () => {
               <Label htmlFor="mobile">Mobile</Label>
               <Input
                 id="mobile"
-                placeholder="e.g. 13800138000"
+                autoComplete="tel"
+                placeholder="your phone number"
                 {...register('mobile')}
               />
               {errors.mobile && (
-                <p className="text-[0.8rem] font-medium text-destructive">{getFieldMessage(errors.mobile.message)}</p>
+                <p className="text-destructive text-[0.8rem] font-medium">
+                  {getFieldMessage(errors.mobile.message)}
+                </p>
               )}
             </div>
 
@@ -66,11 +76,14 @@ const LoginRoute = () => {
               <Input
                 id="password"
                 type="password"
-                placeholder="at least 5 characters"
+                autoComplete="current-password"
+                placeholder="your password"
                 {...register('password')}
               />
               {errors.password && (
-                <p className="text-[0.8rem] font-medium text-destructive">{getFieldMessage(errors.password.message)}</p>
+                <p className="text-destructive text-[0.8rem] font-medium">
+                  {getFieldMessage(errors.password.message)}
+                </p>
               )}
             </div>
 
@@ -88,9 +101,9 @@ const LoginRoute = () => {
             </Button>
           </form>
         </CardContent>
-        <CardFooter className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
+        <CardFooter className="text-muted-foreground flex flex-wrap items-center justify-center gap-2 text-sm">
           No account?{' '}
-          <Link className="font-semibold text-primary hover:underline" to="/auth/register">
+          <Link className="text-primary font-semibold hover:underline" to="/auth/register">
             Create one
           </Link>
         </CardFooter>
