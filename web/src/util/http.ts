@@ -7,6 +7,7 @@ import Axios, {
 
 import { env } from './env.ts';
 import { clearAccessToken, getAccessToken } from '@/service/token.ts';
+import { errorToast } from './toast.ts';
 
 const LOGIN_PATH = '/auth/login';
 
@@ -36,23 +37,32 @@ function toLoginWithRedirect() {
   window.location.href = `${LOGIN_PATH}?redirectTo=${encodeURIComponent(redirectTo)}`;
 }
 
-function rejectByCode(code: number, msg: string | undefined, payload: unknown) {
-  const payloadJson = JSON.stringify(payload)
+function resolveErrorMessage(rawMessage: unknown, fallback: string) {
+  if (typeof rawMessage === 'string' && rawMessage.trim().length > 0) {
+    return rawMessage;
+  }
+
+  return fallback;
+}
+
+function rejectByCode(code: number, msg: string | undefined) {
+  const message = resolveErrorMessage(msg, `Request failed with business code ${code}`);
+
   if (code === 401) {
     clearAccessToken();
     toLoginWithRedirect();
-    return Promise.reject(Error(`[unauthorized] ${payloadJson}`));
+    return Promise.reject(Error('Unauthorized'));
   }
 
-  console.error(msg || `Request failed with business code ${code}`);
-  return Promise.reject(Error(`[error] ${payloadJson}`));
+  errorToast(message);
+  return Promise.reject(Error(message));
 }
 
 requestInstance.interceptors.request.use(authRequestInterceptor);
 requestInstance.interceptors.response.use(
   async (response: AxiosResponse<ResponseRecord>) => {
     if (response.data.code !== 200) {
-      return rejectByCode(response.data.code, response.data.msg, response);
+      return rejectByCode(response.data.code, response.data.msg);
     }
 
     return response;
@@ -63,20 +73,22 @@ requestInstance.interceptors.response.use(
     const businessMsg = error.response?.data?.msg;
 
     if (statusCode === 401 || businessCode === 401) {
-      return rejectByCode(401, businessMsg || error.message, error);
+      return rejectByCode(401, businessMsg || error.message);
     }
 
     if (typeof businessCode === 'number' && businessCode !== 200) {
-      return rejectByCode(businessCode, businessMsg || error.message, error);
+      return rejectByCode(businessCode, businessMsg || error.message);
     }
 
     if (typeof statusCode === 'number') {
-      console.error(businessMsg || `Request failed with status ${statusCode}`);
-      return Promise.reject(error);
+      const message = resolveErrorMessage(businessMsg, `Request failed with status ${statusCode}`);
+      errorToast(message);
+      return Promise.reject(Error(message));
     }
 
-    console.error(error.message);
-    return Promise.reject(error);
+    const message = resolveErrorMessage(error.message, 'Network request failed');
+    errorToast(message);
+    return Promise.reject(Error(message));
   },
 );
 

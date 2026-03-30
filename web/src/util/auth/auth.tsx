@@ -1,7 +1,10 @@
 import { Navigate, useLocation } from 'react-router';
+import { Loader2 } from 'lucide-react';
 
 import { useUser } from './auth.ts';
 import { getHref } from '../path.ts';
+import { Button } from '@/components/ui/button';
+import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
 const FullPageState = ({
   title,
@@ -14,21 +17,19 @@ const FullPageState = ({
   primaryLabel: string;
   onPrimary: () => void;
 }) => (
-  <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 px-6 py-16 text-slate-100">
-    <div className="pointer-events-none absolute -left-24 top-[-30%] h-96 w-96 rounded-full bg-sky-500/25 blur-3xl" />
-    <div className="pointer-events-none absolute -right-24 bottom-[-30%] h-96 w-96 rounded-full bg-cyan-400/20 blur-3xl" />
-
-    <div className="relative w-full max-w-xl rounded-3xl border border-white/15 bg-white/10 p-8 shadow-2xl backdrop-blur-xl">
-      <h2 className="text-2xl font-semibold tracking-tight">{title}</h2>
-      <p className="mt-3 text-sm leading-6 text-slate-300">{description}</p>
-      <button
-        className="mt-6 inline-flex items-center rounded-lg bg-cyan-400 px-4 py-2 text-sm font-medium text-slate-950 transition hover:bg-cyan-300"
-        onClick={onPrimary}
-        type="button"
-      >
-        {primaryLabel}
-      </button>
-    </div>
+  <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4 py-16">
+    <Card className="w-full max-w-md shadow-lg text-center">
+      <CardHeader>
+        <CardTitle className="text-xl">{title}</CardTitle>
+        <CardDescription>{description}</CardDescription>
+      </CardHeader>
+      <CardFooter className="justify-center">
+        <Button onClick={onPrimary}>
+          {primaryLabel === 'Refresh' && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+          {primaryLabel}
+        </Button>
+      </CardFooter>
+    </Card>
   </div>
 );
 

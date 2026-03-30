@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { createBrowserRouter } from 'react-router';
+import { Navigate, createBrowserRouter } from 'react-router';
 import { RouterProvider } from 'react-router/dom';
+import { Loader2 } from 'lucide-react';
 
 import { ProtectedRoute } from '@/util/auth';
 
@@ -12,16 +13,12 @@ import {
 } from './routes/app/root.tsx';
 
 const RouteHydrateFallback = () => (
-  <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 px-6 py-16 text-slate-100">
-    <div className="pointer-events-none absolute -left-24 top-[-30%] h-96 w-96 rounded-full bg-cyan-500/20 blur-3xl" />
-    <div className="pointer-events-none absolute -right-24 bottom-[-30%] h-96 w-96 rounded-full bg-indigo-400/20 blur-3xl" />
-    <div className="relative w-full max-w-xl rounded-3xl border border-white/15 bg-white/10 p-8 shadow-2xl backdrop-blur-xl">
-      <h2 className="text-2xl font-semibold tracking-tight">Loading route</h2>
-      <p className="mt-3 text-sm leading-6 text-slate-300">
-        Fetching route module and preparing page state.
-      </p>
-      <div className="mt-6 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
-        <div className="h-full w-1/3 animate-pulse rounded-full bg-cyan-300" />
+  <div className="flex min-h-screen items-center justify-center bg-background px-4">
+    <div className="flex flex-col items-center space-y-4 text-center">
+      <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      <div className="space-y-1">
+        <h2 className="text-lg font-semibold tracking-tight text-foreground">Loading route</h2>
+        <p className="text-sm text-muted-foreground">Fetching route module and preparing page state.</p>
       </div>
     </div>
   </div>
@@ -39,6 +36,10 @@ const convert = (queryClient: QueryClient) => (m: any) => {
 
 const createAppRouter = (queryClient: QueryClient) =>
   createBrowserRouter([
+    {
+      path: '/',
+      element: <Navigate replace to="/app" />,
+    },
     {
       path: '/auth/register',
       HydrateFallback: RouteHydrateFallback,

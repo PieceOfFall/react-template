@@ -1,35 +1,35 @@
 import type { FallbackProps } from 'react-error-boundary';
+import { AlertTriangle, RefreshCw, Home } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const MainErrorFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-slate-950 px-6 py-16 text-slate-100" role="alert">
-      <div className="pointer-events-none absolute -left-24 top-[-30%] h-96 w-96 rounded-full bg-rose-500/25 blur-3xl" />
-      <div className="pointer-events-none absolute -right-24 bottom-[-30%] h-96 w-96 rounded-full bg-amber-400/20 blur-3xl" />
-
-      <div className="relative w-full max-w-xl rounded-3xl border border-white/15 bg-white/10 p-8 shadow-2xl backdrop-blur-xl">
-        <p className="text-xs uppercase tracking-[0.24em] text-rose-200/80">Unexpected Error</p>
-        <h2 className="mt-2 text-2xl font-semibold tracking-tight">Something went wrong</h2>
-        <p className="mt-3 text-sm leading-6 text-slate-300">
-          {error instanceof Error ? error.message : 'An unexpected runtime error occurred.'}
-        </p>
-
-        <div className="mt-6 flex flex-wrap gap-3">
-          <button
-            className="inline-flex items-center rounded-lg bg-rose-400 px-4 py-2 text-sm font-medium text-slate-950 transition hover:bg-rose-300"
-            onClick={resetErrorBoundary}
-            type="button"
-          >
+    <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4 py-16" role="alert">
+      <Card className="w-full max-w-md shadow-lg">
+        <CardHeader>
+          <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-destructive/10">
+            <AlertTriangle className="h-6 w-6 text-destructive" />
+          </div>
+          <CardTitle className="text-2xl">Something went wrong</CardTitle>
+          <CardDescription>An unexpected runtime error occurred.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="rounded-md bg-muted p-4 text-sm text-muted-foreground">
+            {error instanceof Error ? error.message : 'Unknown error'}
+          </div>
+        </CardContent>
+        <CardFooter className="flex gap-3">
+          <Button onClick={resetErrorBoundary} variant="default" className="flex-1">
+            <RefreshCw className="mr-2 h-4 w-4" />
             Retry
-          </button>
-          <button
-            className="inline-flex items-center rounded-lg border border-white/20 bg-white/5 px-4 py-2 text-sm font-medium text-slate-100 transition hover:bg-white/10"
-            onClick={() => window.location.assign(window.location.origin)}
-            type="button"
-          >
+          </Button>
+          <Button onClick={() => window.location.assign(window.location.origin)} variant="outline" className="flex-1">
+            <Home className="mr-2 h-4 w-4" />
             Go Home
-          </button>
-        </div>
-      </div>
+          </Button>
+        </CardFooter>
+      </Card>
     </div>
   );
 };

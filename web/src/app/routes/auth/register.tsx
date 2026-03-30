@@ -1,9 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router';
+import { Link, Navigate, useNavigate } from 'react-router';
 import { z } from 'zod';
+import { Loader2 } from 'lucide-react';
 
 import { registerInputSchema, useRegister, useUser } from '@/util/auth';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Alert, AlertDescription } from '@/components/ui/alert';
 
 const getFieldMessage = (message: unknown) =>
   typeof message === 'string' ? message : 'Please check this field.';
@@ -48,95 +54,86 @@ const RegisterRoute = () => {
   });
 
   if (user.data) {
-    navigate('/app', { replace: true });
-    return null;
+    return <Navigate to="/app" replace />;
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-snow to-secondary/40 px-4 py-12">
-      <div className="mx-auto w-full max-w-md rounded-2xl border border-border bg-card p-8 shadow-xl">
-        <h1 className="text-2xl font-semibold text-foreground">Create account</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Register with your mobile and password.
-        </p>
-
-        <form className="mt-8 space-y-5" onSubmit={onSubmit}>
-          <label className="block">
-            <span className="mb-2 block text-sm font-medium text-foreground">Mobile</span>
-            <input
-              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-              placeholder="e.g. 13800138000"
-              {...register('mobile')}
-            />
-            {errors.mobile && (
-              <p className="mt-1 text-xs text-destructive">{getFieldMessage(errors.mobile.message)}</p>
-            )}
-          </label>
-
-          <label className="block">
-            <span className="mb-2 block text-sm font-medium text-foreground">Nickname (optional)</span>
-            <input
-              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-              placeholder="your nickname"
-              {...register('nickName')}
-            />
-          </label>
-
-          <label className="block">
-            <span className="mb-2 block text-sm font-medium text-foreground">Password</span>
-            <input
-              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-              type="password"
-              placeholder="at least 5 characters"
-              {...register('password')}
-            />
-            {errors.password && (
-              <p className="mt-1 text-xs text-destructive">{getFieldMessage(errors.password.message)}</p>
-            )}
-          </label>
-
-          <label className="block">
-            <span className="mb-2 block text-sm font-medium text-foreground">Confirm password</span>
-            <input
-              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground outline-none transition focus:border-primary focus:ring-2 focus:ring-primary/30"
-              type="password"
-              placeholder="repeat password"
-              {...register('confirmPassword')}
-            />
-            {errors.confirmPassword && (
-              <p className="mt-1 text-xs text-destructive">
-                {getFieldMessage(errors.confirmPassword.message)}
-              </p>
-            )}
-          </label>
-
-          {registerMutation.error ? (
-            <div className="rounded-lg border border-destructive/30 bg-destructive/10 px-3 py-2 text-sm text-destructive">
-              {registerMutation.error instanceof Error
-                ? registerMutation.error.message
-                : 'Register failed.'}
+    <div className="flex min-h-screen items-center justify-center bg-muted/40 px-4 py-12">
+      <Card className="w-full max-w-md shadow-lg">
+        <CardHeader className="space-y-1">
+          <CardTitle>Create account</CardTitle>
+          <CardDescription>Register with your mobile and password.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form className="space-y-4" onSubmit={onSubmit}>
+            <div className="space-y-2">
+              <Label htmlFor="mobile">Mobile</Label>
+              <Input
+                id="mobile"
+                placeholder="e.g. 13800138000"
+                {...register('mobile')}
+              />
+              {errors.mobile && (
+                <p className="text-[0.8rem] font-medium text-destructive">{getFieldMessage(errors.mobile.message)}</p>
+              )}
             </div>
-          ) : null}
 
-          <button
-            className="w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
-            disabled={registerMutation.isPending}
-            type="submit"
-          >
-            {registerMutation.isPending ? 'Creating account...' : 'Create account'}
-          </button>
-        </form>
+            <div className="space-y-2">
+              <Label htmlFor="nickName">Nickname (optional)</Label>
+              <Input
+                id="nickName"
+                placeholder="your nickname"
+                {...register('nickName')}
+              />
+            </div>
 
-        <p className="mt-6 text-center text-sm text-muted-foreground">
+            <div className="space-y-2">
+              <Label htmlFor="password">Password</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="at least 5 characters"
+                {...register('password')}
+              />
+              {errors.password && (
+                <p className="text-[0.8rem] font-medium text-destructive">{getFieldMessage(errors.password.message)}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword">Confirm password</Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="repeat password"
+                {...register('confirmPassword')}
+              />
+              {errors.confirmPassword && (
+                <p className="text-[0.8rem] font-medium text-destructive">{getFieldMessage(errors.confirmPassword.message)}</p>
+              )}
+            </div>
+
+            {registerMutation.error ? (
+              <Alert variant="destructive">
+                <AlertDescription>
+                  {registerMutation.error instanceof Error ? registerMutation.error.message : 'Register failed.'}
+                </AlertDescription>
+              </Alert>
+            ) : null}
+
+            <Button className="w-full" disabled={registerMutation.isPending} type="submit">
+              {registerMutation.isPending && <Loader2 className="animate-spin" />}
+              {registerMutation.isPending ? 'Creating account...' : 'Create account'}
+            </Button>
+          </form>
+        </CardContent>
+        <CardFooter className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
           Already have an account?{' '}
-          <Link
-            className="font-semibold text-primary underline-offset-2 hover:underline"
-            to="/auth/login"
-          >
+          <Link className="font-semibold text-primary hover:underline" to="/auth/login">
             Sign in
           </Link>
-        </p>
-      </div>
+        </CardFooter>
+      </Card>
     </div>
   );
 };
