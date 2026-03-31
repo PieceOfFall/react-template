@@ -1,9 +1,9 @@
 import { QueryClientProvider } from '@tanstack/react-query'
-import type { ReactNode } from 'react'
+import type { PropsWithChildren } from 'react'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
 import { queryClient } from '../lib/queryClient'
 
-export const AppProvider = ({ children }: { children: ReactNode }) => (
+export const AppProvider = ({ children }: PropsWithChildren) => (
   <SafeAreaProvider>
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   </SafeAreaProvider>
