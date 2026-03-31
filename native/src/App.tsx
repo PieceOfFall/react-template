@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { NavigationContainer } from '@react-navigation/native'
 import { Pressable, StyleSheet, Text } from 'react-native'
 import HomePage from './pages/HomePage'
 import UserCenterPage from './pages/UserCenterPage'
@@ -17,21 +18,23 @@ const HeaderLogoutButton = () => {
 }
 
 const App = () => (
-  <Tab.Navigator
-    screenOptions={{
-      headerTitleAlign: 'center',
-      tabBarActiveTintColor: '#16a34a',
-    }}
-  >
-    <Tab.Screen name="Home" component={HomePage} />
-    <Tab.Screen
-      name="Me"
-      component={UserCenterPage}
-      options={{
-        headerRight: () => <HeaderLogoutButton />,
+  <NavigationContainer>
+    <Tab.Navigator
+      screenOptions={{
+        headerTitleAlign: 'center',
+        tabBarActiveTintColor: '#16a34a',
       }}
-    />
-  </Tab.Navigator>
+    >
+      <Tab.Screen name="Home" component={HomePage} />
+      <Tab.Screen
+        name="Me"
+        component={UserCenterPage}
+        options={{
+          headerRight: () => <HeaderLogoutButton />,
+        }}
+      />
+    </Tab.Navigator>
+  </NavigationContainer>
 )
 
 const styles = StyleSheet.create({
