@@ -2,12 +2,12 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Pressable, StyleSheet, Text } from 'react-native'
 import HomePage from './pages/HomePage'
 import UserCenterPage from './pages/UserCenterPage'
-import { useAuth } from './stores/auth'
+import { type AuthState, useAuthStore } from './stores/auth'
 
 const Tab = createBottomTabNavigator()
 
 const HeaderLogoutButton = () => {
-  const { logout } = useAuth()
+  const logout = useAuthStore((state: AuthState) => state.logout)
 
   return (
     <Pressable onPress={logout} style={styles.logoutButton}>

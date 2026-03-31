@@ -3,7 +3,8 @@
   "compilerOptions": {
     "strict": true,
     "noUnusedLocals": true,
-    "noUnusedParameters": true
+    "noUnusedParameters": true,
+    "types": ["nativewind/types"]
   },
-  "include": ["src", "index.js"]
+  "include": ["src", "index.js", "nativewind-env.d.ts"]
 }

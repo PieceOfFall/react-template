@@ -1,3 +1,18 @@
+# React Native (Expo)
+
+## Run requirements
+
+- Node.js: `>=20 <24` (recommended: Node 22, see `.nvmrc`)
+- pnpm: project default
+
+If you are on Node 24+, Expo may fail on Windows when loading `metro.config.js`
+with `ERR_UNSUPPORTED_ESM_URL_SCHEME`.
+
+## Start commands
+
+- `pnpm start` (Expo dev server on port `8081`)
+- `pnpm web` (Web dev server on port `8082`)
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
